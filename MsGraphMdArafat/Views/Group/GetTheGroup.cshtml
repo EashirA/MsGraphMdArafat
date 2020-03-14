@@ -1,0 +1,56 @@
+@using Users = Microsoft.Graph.User
+@model MsGraphMdArafat.Models.SingleGroup
+
+@{
+  ViewBag.Title = "GetTheGroup";
+}
+
+<div style="text-align: center; margin-top: 50px">
+  <ul style="list-style: none">
+    @try
+    {
+      <li><img src="data:image/png;base64, @Model.Logo" width="105" height="100" /></li>
+      <li><br /></li>
+      <li><h2 style="color: darkolivegreen">@Model.Name</h2></li>
+      <li><br /></li>
+      <li><h5 style="color: deepskyblue">@Model.Description</h5></li>
+      <li><br /></li>
+
+      if (Model.Owner != null)
+      {
+        foreach (Users member in Model.Owner)
+        {
+          <li>@member.DisplayName</li>
+        }
+      }
+      else
+      {
+        <li><b style="color: orangered">No Owner</b></li>
+      }
+
+      <li><br /></li>
+
+      if (Model.Member != null)
+      {
+        foreach (Users member in Model.Member)
+        {
+          <li>@member.DisplayName</li>
+        }
+      }
+      else
+      {
+        <li><b style="color: orangered">No member</b></li>
+      }
+
+      <li><br /><br /></li>
+
+    }
+    catch (Exception e)
+    {
+      <li><b style="color: orangered">@e.Message</b></li>
+    }
+    <li><br /><br /></li>
+  </ul>
+  <h4>@Html.ActionLink("Back to Groups", "GroupDetail", "Group")</h4>
+</div>
+

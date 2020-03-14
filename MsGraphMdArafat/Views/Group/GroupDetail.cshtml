@@ -1,0 +1,30 @@
+@model MsGraphMdArafat.ViewModels.GroupViewModel
+
+@{
+  ViewBag.Title = "GroupDetail";
+}
+
+<div style="text-align: center; margin-top: 50px">
+  <ul style="list-style: none">
+    @try
+    {
+      foreach (var item in Model.GroupList)
+      {
+        <li><img src="data:image/png;base64, @item.Logo" width="105" height="100" /></li>
+        <li><br /></li>
+        <li>
+          @Html.ActionLink(@item.Name, "GetTheGroup", "Group",
+            new { Id = item.Id }, null)
+        </li>
+        <li><br /><br /></li>
+      }
+    }
+    catch (Exception e)
+    {
+      <li><b style="color: orangered">@e.Message</b></li>
+    }
+    <li><br /><br /></li>
+
+  </ul>
+</div>
+
